@@ -18,3 +18,4 @@
 !docs/**
 !install_ccextractor.sh
 !install_ccextractor_simple.sh
+!install_dependencies.sh
