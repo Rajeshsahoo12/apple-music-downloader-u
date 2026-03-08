@@ -42,3 +42,12 @@ rm -rf Bento4-SDK-1-6-0-641.x86_64-unknown-linux Bento4-SDK-1-6-0-641.x86_64-unk
 
 # ── Cleanup ───────────────────────────────────────────────────────────────────
 rm -rf gpac ccextractor
+rm -rf ~/.cargo ~/.rustup
+
+echo "✅ All done!"
+echo ""
+echo "Verifying installations:"
+MP4Box -version 2>&1 | head -1
+ccextractor --version 2>&1 | head -1
+mp4decrypt 2>&1 | head -1
+ffmpeg -version 2>&1 | head -1
