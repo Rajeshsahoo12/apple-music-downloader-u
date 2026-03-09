@@ -42,7 +42,7 @@ rm -rf Bento4-SDK-1-6-0-641.x86_64-unknown-linux Bento4-SDK-1-6-0-641.x86_64-unk
 
 # ── Cleanup ───────────────────────────────────────────────────────────────────
 rm -rf gpac ccextractor
-rm -rf ~/.cargo ~/.rustup
+rustup self uninstall -y
 
 echo "✅ All done!"
 echo ""
