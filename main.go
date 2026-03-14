@@ -2222,14 +2222,14 @@ func processURL(urlRaw string, albumNum int, albumTotal int, token string, mutex
 		if len(Config.MediaUserToken) <= 50 {
 			mutex.Lock()
 			fmt.Println(": media-user-token is not set, skip MV dl")
-			counter.Success++
+			counter.Unavailable++
 			mutex.Unlock()
 			return
 		}
 		if _, err := exec.LookPath("mp4decrypt"); err != nil {
 			mutex.Lock()
 			fmt.Println(": mp4decrypt is not found, skip MV dl")
-			counter.Success++
+			counter.Unavailable++
 			mutex.Unlock()
 			return
 		}
