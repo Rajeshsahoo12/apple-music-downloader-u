@@ -6,7 +6,6 @@ type ConfigSet struct {
 	AuthorizationToken         string `yaml:"authorization-token"`
 	Language                   string `yaml:"language"`
 	SaveLrcFile                bool   `yaml:"save-lrc-file"`
-	LyricsOnly                 bool   `yaml:"lyrics-only"`
 	LrcType                    string `yaml:"lrc-type"`
 	LrcFormat                  string `yaml:"lrc-format"`
 	SaveAnimatedArtwork        bool   `yaml:"save-animated-artwork"`
@@ -34,27 +33,24 @@ type ConfigSet struct {
 	GetM3u8Mode                string `yaml:"get-m3u8-mode"`
 	GetM3u8FromDevice          bool   `yaml:"get-m3u8-from-device"`
 	AacType                    string `yaml:"aac-type"`
-	AacMax                     int    `yaml:"aac-max"`
 	AlacMax                    int    `yaml:"alac-max"`
+	AlacBitMax                 string `yaml:"alac-bit-max"`	
 	AtmosMax                   int    `yaml:"atmos-max"`
 	LimitMax                   int    `yaml:"limit-max"`
 	UseSongInfoForPlaylist     bool   `yaml:"use-songinfo-for-playlist"`
 	DlAlbumcoverForPlaylist    bool   `yaml:"dl-albumcover-for-playlist"`
-	PreferPlaylistEditorial    bool   `yaml:"prefer-playlist-editorial"`
 	MVAudioType                string `yaml:"mv-audio-type"`
 	MVMax                      int    `yaml:"mv-max"`
-	DownloadMusicVideo         bool   `yaml:"download-music-video"`
+	AacMax                     int    `yaml:"aac-max"`
+	MVDownloadMode  		   string `yaml:"mv-dl"`
 	ConvertAfterDownload       bool   `yaml:"convert-after-download"`
 	ConvertFormat              string `yaml:"convert-format"`
 	ConvertKeepOriginal        bool   `yaml:"convert-keep-original"`
 	ConvertSkipIfSourceMatch   bool   `yaml:"convert-skip-if-source-matches"`
 	FFmpegPath                 string `yaml:"ffmpeg-path"`
 	ConvertExtraArgs           string `yaml:"convert-extra-args"`
-	ConvertWithMetadata        bool   `yaml:"convert-with-metadata"`
 	ConvertWarnLossyToLossless bool   `yaml:"convert-warn-lossy-to-lossless"`
 	ConvertSkipLossyToLossless bool   `yaml:"convert-skip-lossy-to-lossless"`
-	ConvertCheckBadALAC        bool   `yaml:"convert-check-bad-alac"`
-	ConvertDeleteBadALAC       bool   `yaml:"convert-delete-bad-alac"`
 }
 
 type Counter struct {
