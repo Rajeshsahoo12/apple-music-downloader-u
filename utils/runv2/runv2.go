@@ -64,7 +64,7 @@ func Run(adamId string, playlistUrl string, outfile string, Config structs.Confi
 	}
 
 	// parse m3u8
-	segments, err := parseMediaPlaylist(do.Body)
+	segments, mapURI, err := parseMediaPlaylist(do.Body)
 	if err != nil {
 		return err
 	}
@@ -81,7 +81,11 @@ func Run(adamId string, playlistUrl string, outfile string, Config structs.Confi
 	if err != nil {
 		return err
 	}
-	fileUrl, err := parsedUrl.Parse(segment.URI)
+	filePath := segment.URI
+	if mapURI != "" {
+		filePath = mapURI
+	}
+	fileUrl, err := parsedUrl.Parse(filePath)
 	if err != nil {
 		return err
 	}
@@ -343,24 +347,28 @@ func filterResponse(f io.Reader) (*bytes.Buffer, error) {
 	return buf, nil
 }
 
-func parseMediaPlaylist(r io.ReadCloser) ([]*m3u8.MediaSegment, error) {
+func parseMediaPlaylist(r io.ReadCloser) ([]*m3u8.MediaSegment, string, error) {
 	defer r.Close()
 	playlistBuf, err := filterResponse(r)
 	if err != nil {
-		return nil, err
+		return nil, "", err
 	}
 
 	playlist, listType, err := m3u8.Decode(*playlistBuf, true)
 	if err != nil {
-		return nil, err
+		return nil, "", err
 	}
 
 	if listType != m3u8.MEDIA {
-		return nil, errors.New("m3u8 not of media type")
+		return nil, "", errors.New("m3u8 not of media type")
 	}
 
 	mediaPlaylist := playlist.(*m3u8.MediaPlaylist)
-	return mediaPlaylist.Segments, nil
+	mapURI := ""
+	if mediaPlaylist.Map != nil {
+		mapURI = mediaPlaylist.Map.URI
+	}
+	return mediaPlaylist.Segments, mapURI, nil
 }
 
 //pasing
